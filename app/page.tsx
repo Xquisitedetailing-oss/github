@@ -7,6 +7,7 @@ import PricingConfigurator from "./components/PricingConfigurator";
 import BeforeAfter from "./components/BeforeAfter";
 import Process from "./components/Process";
 import Reviews from "./components/Reviews";
+import Portfolio from "./components/Portfolio";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
 
@@ -22,6 +23,7 @@ export default function Home() {
       <Process />
       <PricingConfigurator />
       <Reviews />
+      <Portfolio />
       <CTA />
       <Footer />
     </>
