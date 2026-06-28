@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "./components/SmoothScroll";
+import Cursor from "./components/Cursor";
 
-const geistSans = Geist({
+const geist = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "X-quisite Car Detailing | Premium Autodetailing in Roden",
+  title: "Xquisite Car Detailing | Premium Autodetailing Roden",
   description:
-    "Professionele autodetailing, polijsten en keramische coating in Roden. Wij bedienen Groningen, Friesland en Drenthe met de hoogste kwaliteitsstandaard.",
+    "Waar kwaliteit geen toeval is, maar een keuze. Premium autodetailing, lakcorrectie en keramische coating in Roden voor heel Noord-Nederland.",
+  keywords: "autodetailing, lakcorrectie, keramische coating, polijsten, Roden, Groningen, Drenthe, Friesland",
 };
 
 export default function RootLayout({
@@ -24,11 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="nl"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="nl" className={`${geist.variable}`}>
+      <body>
+        <SmoothScroll />
+        <Cursor />
+        {children}
+      </body>
     </html>
   );
 }

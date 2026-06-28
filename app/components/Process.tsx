@@ -1,107 +1,101 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const steps = [
   {
-    number: "01",
+    num: "01",
     title: "Intake & Inspectie",
-    description:
-      "Wij beginnen met een grondige inspectie van uw voertuig. Elke kras, vlek en imperfectie wordt gedocumenteerd zodat we het juiste plan van aanpak kunnen opstellen.",
+    body: "Elk voertuig wordt bij aankomst volledig geïnspecteerd. Elke kras, vlek en imperfectie wordt gedocumenteerd. Zo beginnen wij met een helder beeld en een transparant plan.",
+    detail: "Paint thickness meting · Fotodocumentatie · Persoonlijk behandelplan",
   },
   {
-    number: "02",
+    num: "02",
     title: "Voorbereiding",
-    description:
-      "Het voertuig wordt zorgvuldig voorbereid: handwas, ontvetting en clay bar behandeling. Zo begint het eigenlijke werk op een perfect schone ondergrond.",
+    body: "Grondige handwas, ontvetting en clay bar decontaminatie. Wij beginnen het eigenlijke werk altijd op een volledig schone, onbesmette lakondergrond.",
+    detail: "Handwas · Iron remover · Clay bar · IPA decontaminatie",
   },
   {
-    number: "03",
+    num: "03",
     title: "Behandeling",
-    description:
-      "De afgesproken behandeling wordt met professionele producten en machines uitgevoerd. Van lakcorrectie tot coating applicatie — elk detail telt.",
+    body: "De afgesproken behandeling wordt uitgevoerd met professionele apparatuur en topproducten. Van interieur extractie tot machinaal polijsten — elke stap telt.",
+    detail: "Professional grade producten · Machinale behandeling · Tijdregistratie",
   },
   {
-    number: "04",
-    title: "Eindcontrole",
-    description:
-      "Na de behandeling voert onze detailer een uitgebreide eindcontrole uit onder professionele verlichting. Pas bij volledige tevredenheid leveren wij uw auto terug.",
+    num: "04",
+    title: "Eindcontrole & Levering",
+    body: "Uitgebreide eindcontrole onder professionele LED-verlichting. U ontvangt een behandelrapport en persoonlijk nazorgadvies voordat uw auto wordt teruggegeven.",
+    detail: "LED-inspectie · Behandelrapport · Nazorgadvies · Tevredenheidsgarantie",
   },
 ];
 
 export default function Process() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const lineH = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
+
   return (
-    <section id="werkwijze" className="bg-[#050505] py-28 px-6 border-t border-white/5">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-px bg-[#0066FF]" />
-            <span className="text-[#0066FF] text-xs font-semibold tracking-[0.3em] uppercase">
-              Onze Werkwijze
-            </span>
+    <section id="werkwijze" ref={ref} className="bg-black py-24 md:py-36 px-6 overflow-hidden border-t border-white/5">
+      <div className="max-w-[1600px] mx-auto md:px-12 lg:px-20">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="line-accent" />
+              <span className="caption text-[#29ABE2]">Werkwijze</span>
+            </div>
+            <h2 className="heading-lg text-white">
+              Hoe wij<br />
+              <span className="text-white/25">te werk gaan</span>
+            </h2>
           </div>
-          <h2 className="text-4xl md:text-6xl font-black text-white leading-none tracking-tight mb-4">
-            Van intake tot<br />perfecte aflevering
-          </h2>
-          <p className="text-white/50 text-lg max-w-xl">
-            Transparantie en vakmanschap staan centraal in alles wat wij doen. Zo werkt
-            het proces bij X-quisite.
+          <p className="text-white/30 text-sm max-w-xs">
+            Elk voertuig, elke keer dezelfde hoge standaard. Geen uitzonderingen.
           </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="relative p-8 border border-white/5 group hover:bg-[#0066FF]/3 transition-all duration-300"
-            >
-              {/* Connector line */}
-              {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-14 right-0 w-px h-8 bg-[#0066FF]/20 translate-x-px z-10" />
-              )}
-
-              <div className="text-[#0066FF] font-black text-5xl mb-6 opacity-30 group-hover:opacity-60 transition-opacity duration-300">
-                {step.number}
-              </div>
-
-              <div className="w-8 h-0.5 bg-[#0066FF] mb-4" />
-
-              <h3 className="text-white font-bold text-lg mb-3">{step.title}</h3>
-              <p className="text-white/40 text-sm leading-relaxed">{step.description}</p>
-            </motion.div>
-          ))}
         </div>
 
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5"
-        >
-          {[
-            { value: "500+", label: "Behandelde Voertuigen" },
-            { value: "5.0", label: "Google Beoordeling" },
-            { value: "7+", label: "Jaar Ervaring" },
-            { value: "100%", label: "Tevredenheidsgarantie" },
-          ].map((stat) => (
-            <div key={stat.label} className="bg-[#0a0a0a] p-8 text-center">
-              <p className="text-[#0066FF] font-black text-4xl mb-2">{stat.value}</p>
-              <p className="text-white/40 text-sm uppercase tracking-wide">{stat.label}</p>
-            </div>
-          ))}
-        </motion.div>
+        <div className="relative">
+          {/* Animated vertical line */}
+          <div className="absolute left-[19px] top-0 bottom-0 w-px bg-white/5 hidden md:block">
+            <motion.div className="w-full bg-[#29ABE2] origin-top" style={{ height: lineH }} />
+          </div>
+
+          <div className="flex flex-col gap-0">
+            {steps.map((s, i) => (
+              <motion.div
+                key={s.num}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.8, delay: i * 0.1, ease: [0.23, 1, 0.32, 1] }}
+                className="grid md:grid-cols-[40px_1fr] gap-8 pb-16"
+              >
+                {/* Dot */}
+                <div className="hidden md:flex flex-col items-center">
+                  <div className="w-10 h-10 border border-[#29ABE2]/30 bg-black flex items-center justify-center flex-shrink-0 z-10">
+                    <span className="text-[#29ABE2] font-black text-xs">{s.num}</span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="border border-white/5 p-8 hover:border-[#29ABE2]/20 transition-colors duration-500 group">
+                  <p className="caption text-[#29ABE2] mb-3 md:hidden">{s.num}</p>
+                  <h3 className="text-white font-bold text-2xl mb-3 group-hover:text-[#29ABE2] transition-colors duration-500">
+                    {s.title}
+                  </h3>
+                  <p className="text-white/40 text-base leading-relaxed mb-5">{s.body}</p>
+                  <div className="flex flex-wrap gap-3">
+                    {s.detail.split(" · ").map((d) => (
+                      <span key={d} className="caption text-white/20 glass px-3 py-1.5">
+                        {d}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
