@@ -8,6 +8,7 @@ import BeforeAfter from "./components/BeforeAfter";
 import Process from "./components/Process";
 import Reviews from "./components/Reviews";
 import Portfolio from "./components/Portfolio";
+import BookingConfigurator from "./components/BookingConfigurator";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
 
@@ -24,6 +25,7 @@ export default function Home() {
       <PricingConfigurator />
       <Reviews />
       <Portfolio />
+      <BookingConfigurator />
       <CTA />
       <Footer />
     </>
